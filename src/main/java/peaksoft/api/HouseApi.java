@@ -50,6 +50,8 @@ public class HouseApi {
     public String edit(@PathVariable Long houseId, Model model, @PathVariable Long agencyId) throws MyException {
         model.addAttribute("house", houseServices.getHouseById(houseId));
         model.addAttribute( agencyId);
+
+
         return "house/updateHouse";
     }
 
