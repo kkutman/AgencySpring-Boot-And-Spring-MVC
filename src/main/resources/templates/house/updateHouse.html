@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Agency</title>
+</head>
+<body>
+
+<form th:object="${house}" th:method="POST" th:action="@{/houses/{agencyId}/{houseId}/update(agencyId=${agencyId},houseId=${houseId})}">
+    <div class="container">
+        <hr>
+        <div class="mb-3">
+            <label for="houseType" class="form-label">Select house type</label>
+            <select class="form-select" id="houseType" name="houseType" required th:field="*{houseType}">
+                <option value="">Choose...</option>
+                <option th:each="houseType : ${T(peaksoft.enums.HouseType).values()}"
+                        th:value="${houseType}"
+                        th:text="${houseType.name()}"></option>
+            </select>
+        </div>
+        <label for="address"><b>House address</b></label>
+        <input type="text" placeholder="Enter house address" th:field="*{address}" name="address" id="address" required>
+
+        <label for="price"><b>Price</b></label>
+        <input type="text" placeholder="Enter price" th:field="*{price}" name="price" id="price"
+               required>
+
+        <label for="room"><b>Room</b></label>
+        <input type="text" placeholder="Enter room" th:field="*{room}" name="room" id="room"
+               required>
+
+        <label for="country"><b>Country</b></label>
+        <input type="text" placeholder="Enter country" th:field="*{country}" name="country" id="country"
+               required>
+
+        <label for="description"><b>Description</b></label>
+        <input type="text" placeholder="Enter description" th:field="*{description}" name="description" id="description"
+               required>
+        <label for="isBooked"><b>Is booked</b></label>
+        <input type="text" placeholder="Enter is booked" th:field="*{isBooked}" name="isBooked" id="isBooked"
+               required>
+
+        <hr>
+        <button type="submit" class="registered">Update Company</button>
+    </div>
+</form>
+
+</body>
+</html>

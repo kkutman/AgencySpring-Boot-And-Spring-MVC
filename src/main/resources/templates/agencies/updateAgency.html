@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Agency</title>
+</head>
+<body>
+
+<form th:object="${edit}" th:method="POST" th:action="@{/templates/agencies.house/update/{agencyId}(agencyId=${id})}">
+    <div class="container">
+        <hr>
+
+        <label for="name"><b>Agency name</b></label>
+        <input type="text" placeholder="Enter Agency name" th:field="*{name}" name="name" id="name" required>
+
+        <label for="country"><b>Country</b></label>
+        <input type="text" placeholder="Enter country" th:field="*{country}" name="country" id="country"
+               required>
+
+        <label for="phone number"><b>Phone Number</b></label>
+        <input type="text" placeholder="Enter Phone number" th:field="*{phoneNumber}" name="phone number" id="phone number"
+               required>
+
+        <label for="email"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" th:field="*{email}" name="email" id="email"
+               required>
+
+        <label for="photo"><b>Image</b></label>
+        <input type="text" placeholder="Enter image" th:field="*{photo}" name="photo" id="photo"
+               required>
+
+        <hr>
+        <button type="submit" class="registered">Update Company</button>
+    </div>
+</form>
+</body>
+</html>
