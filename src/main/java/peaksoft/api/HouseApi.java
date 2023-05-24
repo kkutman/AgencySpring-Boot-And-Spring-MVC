@@ -21,6 +21,8 @@ public class HouseApi {
     public String getAllHouse(@PathVariable Long agencyId, Model model) {
         model.addAttribute("houses", houseServices.getAllHouses(agencyId));
         model.addAttribute("agencyId", agencyId);
+
+
         return "house/allHouse";
     }
     @GetMapping("/new")
