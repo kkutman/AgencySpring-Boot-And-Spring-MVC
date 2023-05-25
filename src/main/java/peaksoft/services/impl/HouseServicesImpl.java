@@ -64,6 +64,7 @@ public class HouseServicesImpl implements HouseServices {
                         if (!house.getCountry().isBlank()) {
                             house1.setCountry(house.getCountry());
                             if (!house.getIsBooked()) {
+                                house1.setDescription(house.getDescription());
                                 house1.setIsBooked(false);
                             }
                             houseRepository.save(house1);

@@ -1,12 +1,16 @@
 package peaksoft.api;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import peaksoft.exception.MyException;
 import peaksoft.model.Agency;
+import peaksoft.repository.CustomerRepository;
 import peaksoft.services.AgencyServices;
+import peaksoft.services.CustomerServices;
+import peaksoft.services.HouseServices;
 
 import java.util.List;
 
@@ -15,15 +19,29 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AgencyApi {
     private final AgencyServices agencyServices;
+    private final HouseServices houseServices;
+    private final CustomerRepository customerServices;
     @GetMapping
-    public String getAllAgency(Model model) {
+    public String getAllAgency(@RequestParam(name = "keyWord", required = false) String keyWord,Model model) {
         model.addAttribute("getAllAgency",agencyServices.getAllAgencies());
+        model.addAttribute("keyWord",keyWord);
         return "agencies/index";
     }
     @GetMapping("/new")
     public String create(Model model) {
         model.addAttribute("agency", new Agency());
         return "agencies/newAgency";
+    }
+    @GetMapping("k/{id}")
+    public String getById(@PathVariable("id") Long agencyId, Model model) {
+        int countHouse = houseServices.getAllHouses(agencyId).size();
+        try {
+            model.addAttribute("countHouse",countHouse);
+            model.addAttribute("agency", agencyServices.getAgencyById(agencyId));
+            return "agencies/index";
+        } catch (MyException e) {
+            return e.getMessage();
+        }
     }
 
     @PostMapping("/saveAgency")
@@ -56,7 +74,7 @@ public class AgencyApi {
         return "redirect:/agencies";
     }
 
-    @PostMapping("/{id}/delete")
+    @GetMapping("/{id}/delete")
     public String delete(@PathVariable Long id) {
         try {
             agencyServices.deleteAgencyById(id);
