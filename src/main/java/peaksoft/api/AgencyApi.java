@@ -68,6 +68,7 @@ public class AgencyApi {
                              @PathVariable("id") Long id) {
         try {
             agencyServices.updateAgency(id, agency);
+
         } catch (MyException e) {
             throw new RuntimeException(e);
         }
